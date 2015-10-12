@@ -1,0 +1,5 @@
+/node_modules
+/dist/javascripts/lib
+npm-debug.log
+stamplay.json
+.DS_Store
