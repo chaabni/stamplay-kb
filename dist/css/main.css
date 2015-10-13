@@ -68,6 +68,10 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 #search-bar.input-field {
   margin-top: 0;
 }
+#search-bar:hover input {
+  border-bottom: 1px solid #272D4E !important;
+  box-shadow: 0 1px 0 0 #272D4E !important;
+}
 
 #search-bar:hover {
   width: 50%;

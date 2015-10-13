@@ -64,6 +64,13 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
     &.input-field {
         margin-top:0;
     }
+    &:hover {
+        & input {
+            border-bottom: 1px solid $primary-color !important;
+            box-shadow: 0 1px 0 0 $primary-color !important;
+        }
+
+    }
 }
 #search-bar:hover {
     width:50%;

@@ -3,37 +3,71 @@
         <div class="row" style="margin-bottom:0;">
             <div class="input-field col s3" id="search-bar">
                 <i class="material-icons prefix input-primary">search</i>
-                <input type="text" placeholder="Search Questions" class="input-primary">
+                <input type="text"
+                       placeholder="Search Questions"
+                       class="input-primary"
+                       ng-change="searchQuestions()"
+                       ng-model-options="{ debounce: 1000 }"
+                       ng-model="question_query" />
             </div>
+
             <a class="waves-effect waves-light btn bg-secondary right" ui-sref="New Request" ng-show="currentUser">
                 <i class="material-icons right">mode_edit</i>New Question
             </a>
         </div>
-        <div class="row">
+
+
+        <!--  -->
+        <!-- Recent Questions -->
+        <!--  -->
+        <div class="row" ng-hide="question_query">
             <div style="min-height:70vh">
-                <!-- Recent Questions! -->
                 <ul class="collection" style="border:none;">
                     <li class="collection-item avatar" ng-repeat="question in questionCollection">
-                        <img src="{{question.instance.owner.profileImg}}" alt="" class="circle">
+                        <img ng-src="{{question.instance.owner.profileImg}}" alt="" class="circle">
                         <a href="#!" class="secondary-content">
                             <span class="flow-text">{{question.instance.actions.votes.total}}</span>
                             <i class="material-icons">thumb_up</i></a>
-                        <span class="title">{{question.instance.title}}</span>
-                        <p>{{question.instance.body}}
-                        </p>
+                        <span class="title col">{{question.instance.title}}</span>
+                        <p class="grey-text lightweight truncate col s11">{{question.instance.body}}</p>
 
                     </li>
                 </ul>
-                <div class="progress bg-primary" ng-if="!questionCollection" style="position:fixed;bottom:-15px;left:0">
-                    <div class="indeterminate bg-accent"></div>
-                </div>
-
             </div>
         </div>
+        <!--  -->
+        <!-- Recent Questions END -->
+        <!--  -->
+
+        <!--  -->
+        <!-- QUERY QUESTIONS -->
+        <!--  -->
+        <div class="row" ng-show="question_query.length">
+            <div style="min-height:70vh">
+                <ul class="collection" style="border:none;">
+                    <li class="collection-item avatar" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
+                        <img ng-src="{{question.owner.profileImg || 'http://placehold.it/50x50'}}" class="circle">
+                        <a href="#!" class="secondary-content">
+                            <span>{{question.votes}}</span>
+                            <i class="material-icons">thumb_up</i></a>
+                        <span class="title col truncate" ng-bind-html="question._highlightResult.title.value"></span>
+                        <p class="grey-text lightweight truncate col s11" ng-bind-html="question._highlightResult.body.value">
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!--  -->
+        <!-- QUERY QUESTIONS End -->
+        <!--  -->
+
+
+
     </div>
     <div class="col s3">
         <div  style="min-height:70vh;">
-            <h4 class="lightweight center-align" style=" padding:10px;">Join Our Slack Community</h4>
+            <h4 class="lightweight center-align" style="padding:10px;">Join Our Slack Community</h4>
             <div class="input-field col s10 offset-s1">
                 <input type="email" placeholder="Email">
             </div>
@@ -45,4 +79,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="progress bg-primary" ng-if="!questionCollection" style="position:fixed;bottom:-15px;left:0">
+    <div class="indeterminate bg-accent"></div>
 </div>
