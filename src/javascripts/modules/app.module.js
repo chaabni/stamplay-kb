@@ -7,9 +7,18 @@ angular.module("app", ["ui.router", "ngStamplay", "ngSanitize", "algoliasearch"]
             controller: "HomeController"
         })
         .state("New Request", {
-            url: "/new",
+            url: "/question/new",
             templateUrl: "dist/templates/new_question.html",
-            controller: "QuestionController"
+            controller: "CreateQuestionController"
+        })
+        .state("Question Details", {
+            url: "/question/details/:id",
+            templateUrl: "dist/templates/question_details.html",
+            controller: "QuestionDetailsController"
+        })
+        .state("User Profile", {
+            url: "/profile/:id",
+            templateUrl: "dist/templates/user_profile.html"
         })
 
     $urlRouterProvider.otherwise("/");

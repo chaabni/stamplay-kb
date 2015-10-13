@@ -60,7 +60,7 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 }
 #search-bar {
     width:50px;
-    transition:all ease-out 0.25s 3.5s;
+    transition:all ease-out 0.25s 8.5s;
     &.input-field {
         margin-top:0;
     }
@@ -72,9 +72,40 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 
     }
 }
+
+.upvote {
+    position: absolute;
+    left: -10px;
+    bottom: 4px;
+    display: inline-block;
+}
+
 #search-bar:hover {
     width:50%;
     transition:all ease-in 0.2s 0s;
+}
+
+.collection-item{
+    border-left:3px solid transparent;
+    border-right:1px solid transparent;
+    transition:all 0.3s linear;
+    & > p > em {
+        font-style: normal;
+        font-weight: bold;
+    }
+}
+.circle:hover {
+    box-shadow:1px 1px 10px 1px #999;
+}
+.title:hover {
+    text-shadow:0 0 1ps  #999;
+}
+
+.collection-item:hover {
+    border-left:3px solid $accent-color;
+    border-right:1px solid $secondary-color;
+    transition:all 0.15s linear;
+
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

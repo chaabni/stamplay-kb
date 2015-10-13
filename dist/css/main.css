@@ -62,8 +62,8 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 
 #search-bar {
   width: 50px;
-  -webkit-transition: all ease-out 0.25s 3.5s;
-          transition: all ease-out 0.25s 3.5s;
+  -webkit-transition: all ease-out 0.25s 8.5s;
+          transition: all ease-out 0.25s 8.5s;
 }
 #search-bar.input-field {
   margin-top: 0;
@@ -73,10 +73,43 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
   box-shadow: 0 1px 0 0 #272D4E !important;
 }
 
+.upvote {
+  position: absolute;
+  left: -10px;
+  bottom: 4px;
+  display: inline-block;
+}
+
 #search-bar:hover {
   width: 50%;
   -webkit-transition: all ease-in 0.2s 0s;
           transition: all ease-in 0.2s 0s;
+}
+
+.collection-item {
+  border-left: 3px solid transparent;
+  border-right: 1px solid transparent;
+  -webkit-transition: all 0.3s linear;
+          transition: all 0.3s linear;
+}
+.collection-item > p > em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.circle:hover {
+  box-shadow: 1px 1px 10px 1px #999;
+}
+
+.title:hover {
+  text-shadow: 0 0 1ps  #999;
+}
+
+.collection-item:hover {
+  border-left: 3px solid #fbc02d;
+  border-right: 1px solid #545D8E;
+  -webkit-transition: all 0.15s linear;
+          transition: all 0.15s linear;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

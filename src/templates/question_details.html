@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col s8 offset-s1">
+        <div class="row">
+            <p class="flow-text border-accent col s9">"{{questionDetails.instance.title}}"</p>
+        </div>
+        <p style="padding:20px">{{questionDetails.instance.body}}</p>
+        <hr>
+        <button ng-if="!question.instance.solution" class="btn bg-accent text-primary right">Add Solution</button>
+        <span ng-if="!question.instance.solution" style="font-style:italic">A solution has been submitted yet. Know the answer? Add the solution. </span>
+    </div>
+</div>

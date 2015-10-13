@@ -3,9 +3,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
     var questionCollection = $stamplay.Cobject("question").Collection;
     var client = algolia.Client('7TMV8F22UN', 'b5e5aa05c764aa1718bc96b793078703');
     var index = client.initIndex('KBQUESTIONS');
-    index.clearIndex(function(err, content) {
-      console.log(content);
-    });
+
     return {
         newQuestion : function(details) {
             var q = $q.defer();
@@ -32,6 +30,13 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
                     q.reject();
                 });
                 return q.promise;
+        },
+        getQuestionDetails : function(id) {
+            var q = $q.defer();
+            question.fetch(id).then(function() {
+                q.resolve(question);
+            })
+            return q.promise;
         }
     }
 }]);
