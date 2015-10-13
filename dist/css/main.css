@@ -57,7 +57,6 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
   height: 48px;
   width: 48px;
   border-radius: 50%;
-  border: 2px solid #dddddd;
 }
 
 #search-bar {

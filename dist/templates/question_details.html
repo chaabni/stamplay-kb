@@ -1,11 +1,36 @@
-<div class="row">
-<div class="col s8 offset-s1">
-<div class="row">
-<p class="flow-text border-accent col s9">"{{questionDetails.instance.title}}"</p>
+<div class="row" ng-if="question">
+<div class="col s10 offset-s1">
+<div class="row border-accent" style="display: flex;align-items: center; padding-bottom:10px">
+<div class="col s2 center-align">
+<img ng-src="{{question.instance.owner.profileImg}}" class="img-responsive" style="border-radius:50%">
+<div>{{question.instance.owner.displayName}}</div>
+<div>{{ question.instance.dt_create | date:"shortDate"}}</div>
+<div>{{ question.instance.dt_create | date:"shortTime"}}</div>
 </div>
-<p style="padding:20px">{{questionDetails.instance.body}}</p>
+<p class="flow-text col s10" style="border-left:3px solid #efefef">{{question.instance.title}}</p>
+</div>
+<div class="row">
+<div class="lightweight flow-text">Description</div>
+<p class="col s12">{{question.instance.body}}</p>
+</div>
 <hr>
-<button ng-if="!question.instance.solution" class="btn bg-accent text-primary right">Add Solution</button>
-<span ng-if="!question.instance.solution" style="font-style:italic">A solution has been submitted yet. Know the answer? Add the solution. </span>
+<div class="row">
+<div class="lightweight flow-text col">Solution</div>
+<button ng-if="!question.instance.solution" class="btn bg-accent text-primary right col">Add Solution</button>
+<p ng-if="!question.instance.solution" class="grey-text text-lighten-1 col">A solution has been submitted yet. Know the answer? Add the solution. </p>
+</div>
+<hr>
+<div class="row">
+<div class="row">
+<div class="lightweight flow-text col">Comments - {{question.instance.actions.comments.length}}</div>
+<a class="col right btn bg-accent text-primary" ng-click="show_comment_form = !show_comment_form" ng-hide="show_comment_form">Add Comment</a>
+</div>
+<div class="row">
+<div class="input-field col s8" ng-show="show_comment_form">
+<label>Leave A Comment</label>
+<textarea type="text" class="materialize-textarea" ng-model="new_comment">
+                </textarea></div>
+</div>
+</div>
 </div>
 </div>
