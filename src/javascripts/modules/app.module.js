@@ -3,7 +3,8 @@ angular.module("app", ["ui.router", "ngStamplay"])
     $stateProvider
         .state("Home", {
             url: "/",
-            templateUrl: "dist/templates/home.html"
+            templateUrl: "dist/templates/home.html",
+            controller: "HomeController"
         })
         .state("New Request", {
             url: "/new",
