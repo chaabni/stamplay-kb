@@ -4,16 +4,49 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>StamplayKB</title>
+        <link rel="stylesheet" href="./dist/lib/Materialize/dist/css/materialize.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="./dist/css/main.min.css">
-        <link rel="stylesheet" href="./dist/lib/angular-material/angular-material.min.css">
     </head>
-    <body>
-
+    <body class="container-fluid">
+        <nav class="row" ng-controller="AccountController">
+            <div class="nav-wrapper bg-primary">
+                <div class="col s12">
+                    <a href="#" class="brand-logo">
+                        <img src="./dist/images/stamplay_logo.svg">
+                    </a>
+                    <ul class="right">
+                        <li>
+                            <a href="#"
+                               class="btn lightweight"
+                               ng-cloak ng-hide="currentUser"
+                               ng-click="login()">Login
+                           </a>
+                       </li>
+                    </ul>
+                    <ul class="right" ng-cloak ng-show="currentUser">
+                        <li>
+                            <div class="valign-wrapper">
+                                <img ng-src="{{currentUser.profileImg}}" class="profile-img valign">
+                                <a href="" class="text-white">{{currentUser.displayName}}</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" class="btn white text-primary lightweight" ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <ui-view></ui-view>
+        <script src="./dist/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/dist/lib/stamplay-js-sdk/dist/stamplay.min.js"></script>
         <script src="./dist/lib/angular/angular.min.js"></script>
+        <script src="/dist/lib/angular-stamplay/angular-stamplay.js"></script>
         <script src="./dist/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="./dist/lib/angular-aria/angular-aria.min.js"></script>
         <script src="./dist/lib/angular-animate/angular-animate.min.js"></script>
+        <script src="./dist/lib/Materialize/dist/js/materialize.min.js"></script>
         <script src="./dist/javascripts/modules/modules.js"></script>
         <script src="./dist/javascripts/services/services.min.js"></script>
         <script src="./dist/javascripts/controllers/controllers.min.js"></script>

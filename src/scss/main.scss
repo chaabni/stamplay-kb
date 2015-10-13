@@ -1,3 +1,75 @@
 html, body {
     min-height: 100vh;
 }
+
+
+// Colors
+
+$primary-color:#272D4E;
+$secondary-color:#545D8E;
+$accent-color:#fbc02d;
+
+.bg-primary {
+    background-color:$primary-color !important;
+}
+.bg-secondary {
+    background-color:$secondary-color !important;
+}
+.bg-accent {
+    background-color:$accent-color !important;
+}
+.text-primary {
+    color:$primary-color !important;
+}
+.text-secondary {
+    color:$secondary-color !important;
+}
+.text-accent {
+    color:$accent-color !important;
+}
+.lightweight {
+    font-weight: 100;
+}
+textarea:focus:not([readonly]), input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important;
+}
+
+textarea:focus:not([readonly]).secondary-input , input[type=text]:focus:not([readonly]).secondary-input {
+    border-bottom: 1px solid $secondary-color !important;
+    box-shadow: 0 1px 0 0 $secondary-color !important;
+}
+
+textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonly]).accent-input {
+    border-bottom: 1px solid $accent-color !important;
+    box-shadow: 0 1px 0 0 $accent-color !important;
+}
+
+.input-field .prefix.active {
+    color:$accent-color
+}
+
+.border-accent {
+    border-bottom: 3px solid $accent-color !important;
+}
+.profile-img {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    border:2px solid #dddddd;
+}
+#search-bar {
+    width:50px;
+    transition:all ease-out 0.25s 3.5s;
+    &.input-field {
+        margin-top:0;
+    }
+}
+#search-bar:hover {
+    width:50%;
+    transition:all ease-in 0.2s 0s;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

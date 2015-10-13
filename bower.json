@@ -1,24 +1,26 @@
 {
-    "name": "stamplay-kb",
-    "version": "0.0.1",
-    "authors": [
-        "isaiahgrey93 <isaiahgrey@gmail.com>"
-    ],
-    "description": "Knowledge base for Stamplayers to find solutions.",
-    "main": "",
-    "moduleType": [],
-    "license": "MIT",
-    "homepage": "",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "angular": "~1.4.7",
-        "angular-ui-router": "~0.2.15",
-        "angular-material": "~0.11.3"
-    }
+  "name": "stamplay-kb",
+  "version": "0.0.1",
+  "authors": [
+    "isaiahgrey93 <isaiahgrey@gmail.com>"
+  ],
+  "description": "Knowledge base for Stamplayers to find solutions.",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "angular-stamplay": "*",
+    "stamplay-js-sdk": "stamplay-sdk#~1.2.9",
+    "Materialize": "materialize#~0.97.1"
+  }
 }

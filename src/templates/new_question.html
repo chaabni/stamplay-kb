@@ -1,0 +1,23 @@
+
+<div class="row">
+    <div class="col">
+        <h3 class="grey-text text-lighten-3 lightweight border-accent" style="margin:0px;padding:5px;">New Question</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col s10">
+        <form ng-submit="newQuestion()" class="card col s10" style="padding:10px">
+            <div class="input-field col s10 offset-s1">
+                <label>What is your base question?</label>
+                <input type="text" ng-model="question.title">
+            </div>
+            <div class="input-field col s10 offset-s1">
+                <label>Describe the question in detail.</label>
+                <textarea type="text" class="materialize-textarea input-primary" style="min-height:8em" ng-model="question.body"></textarea>
+            </div>
+            <div class="input-field col s10 offset-s1">
+                <input type="submit" class="btn bg-accent text-secondary" value="Post Question">
+            </div>
+        </form>
+    </div>
+</div>
