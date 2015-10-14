@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col s9">
-        <div class="row" style="margin-bottom:0;">
-            <div class="input-field col s3" id="search-bar">
+        <div class="row"
+             style="margin-bottom:0;">
+            <div class="input-field col s3"
+                 id="search-bar">
                 <i class="material-icons prefix input-primary">search</i>
                 <input type="text"
                        placeholder="Search Questions"
@@ -11,7 +13,9 @@
                        ng-model="question_query" />
             </div>
 
-            <a class="waves-effect waves-light btn bg-secondary right" ui-sref="New Request" ng-show="currentUser">
+            <a class="waves-effect waves-light btn bg-secondary right"
+               ui-sref="New Request"
+               ng-show="currentUser">
                 <i class="material-icons right">mode_edit</i>New Question
             </a>
         </div>
@@ -20,20 +24,26 @@
         <!--  -->
         <!-- Recent Questions -->
         <!--  -->
-        <div class="row" ng-hide="question_query">
+        <div class="row"
+             ng-hide="question_query">
             <div style="min-height:70vh">
-                <ul class="collection" style="border:none;">
+                <ul class="collection"
+                    style="border:none;">
                     <li class="collection-item avatar"
                         ng-repeat="question in questionCollection">
                         <img ng-src="{{question.instance.owner.profileImg}}"
                              class="circle"
                              ui-sref="User Profile({id : question.instance.owner._id})">
-                            <a href="#!" class="secondary-content text-secondary">
-                                <span class='upvote'>{{question.instance.actions.votes.total}}</span>
-                                <i class="material-icons">thumb_up</i>
-                            </a>
-                            <p class="title col s11" ui-sref="Question Details({id : question.instance._id})" style="cursor:pointer">{{question.instance.title}}</p>
-                            <p class="grey-text lightweight truncate col s11">{{question.instance.body}}</p>
+                        <a class="secondary-content text-secondary">
+                            <span class='upvote'>{{question.instance.actions.votes.total}}</span>
+                            <i class="material-icons">thumb_up</i>
+                        </a>
+                        <p class="title col s11 truncate"
+                           ui-sref="Question Details({id : question.instance._id})" style="cursor:pointer;">{{question.instance.title}}</p>
+                        <p class="grey-text lightweight truncate col s11"
+                           ng-bind-html="question.instance.body"
+                           style="max-height:22px">
+                       </p>
                     </li>
                 </ul>
             </div>
@@ -73,24 +83,12 @@
         <!--  -->
         <!-- QUERY QUESTIONS End -->
         <!--  -->
+    <div class="col s3" ng-include="'./dist/templates/_slack_invite.html'" style="position:fixed;right:0;">
 
-
-
-    <div class="col s3">
-        <div  style="min-height:70vh;">
-            <h4 class="lightweight center-align" style="padding:10px;">Join Our Slack Community</h4>
-            <div class="input-field col s10 offset-s1">
-                <input type="email" class="input-primary" placeholder="Email">
-            </div>
-            <div class="input-field col s10 offset-s1">
-                <input type="submit" class="btn right bg-accent text-primary" value="Join">
-            </div>
-            <div class="col s10 offset-s1">
-                <p>We will send you an invite to join our great slack community where you can talk with other Stamplayers, and get help!</p>
-            </div>
-        </div>
     </div>
 </div>
-<div class="progress bg-primary" ng-if="!questionCollection" style="position:fixed;bottom:-15px;left:0">
+<div class="progress bg-primary"
+     ng-if="!questionCollection"
+     style="position:fixed;bottom:-15px;left:0">
     <div class="indeterminate bg-accent"></div>
 </div>

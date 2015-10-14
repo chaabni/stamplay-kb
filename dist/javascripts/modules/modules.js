@@ -1,4 +1,4 @@
-angular.module("app", ["ui.router", "ngStamplay", "ngSanitize", "algoliasearch"])
+angular.module("app", ["ui.router", "ngStamplay", "ngSanitize", "algoliasearch", "ui.tinymce"])
 .config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("Home", {

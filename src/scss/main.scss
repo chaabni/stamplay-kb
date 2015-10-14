@@ -104,7 +104,12 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
     border-left:3px solid $accent-color;
     border-right:1px solid $secondary-color;
     transition:all 0.15s linear;
+}
 
+.output-container {
+    margin: 20px !important;
+    padding: 20px !important;
+    width: calc(100% - 40px) !important;
 }
 
 .flex {

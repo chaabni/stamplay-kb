@@ -5,4 +5,9 @@ angular.module("app").controller("CreateQuestionController", ["QuestionService",
             $state.go("Home");
         })
     }
+    $scope.tinymceOptions = {
+          plugins : 'advlist autolink link image lists charmap print preview',
+          theme: "modern",
+          skin: 'light'
+    };
 }])

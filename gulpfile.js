@@ -72,7 +72,7 @@ gulp.task('controllers', function() {
 // Minfies - Removes Comments - Template Files
 gulp.task('templates', function() {
   gulp.src('src/templates/*.html')
-    .pipe(htmlmin({ collapseWhitespace: true,
+    .pipe(htmlmin({ collapseWhitespace: false,
                     preserveLineBreaks: true,
                     removeComments : true
                 }))

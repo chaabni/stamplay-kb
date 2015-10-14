@@ -17,6 +17,11 @@ angular.module("app").controller("CreateQuestionController", ["QuestionService",
             $state.go("Home");
         })
     }
+    $scope.tinymceOptions = {
+          plugins : 'advlist autolink link image lists charmap print preview',
+          theme: "modern",
+          skin: 'light'
+    };
 }])
 
 angular.module("app").controller("HomeController", ["$scope", "$state", "QuestionService", function($scope, $state, QuestionService) {
@@ -59,5 +64,12 @@ angular.module("app").controller("QuestionDetailsController", ["QuestionService"
             console.log(question.instance.actions.votes.total)
         })
     }
+
+    $scope.tinymceOptions = {
+          plugins : 'advlist autolink link image lists charmap print preview',
+          theme: "modern",
+          skin: 'light',
+          min_height: 300
+    };
 
 }])

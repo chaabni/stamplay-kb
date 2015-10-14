@@ -111,6 +111,12 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
           transition: all 0.15s linear;
 }
 
+.output-container {
+  margin: 20px !important;
+  padding: 20px !important;
+  width: calc(100% - 40px) !important;
+}
+
 .flex {
   display: -webkit-box;
   display: -webkit-flex;
