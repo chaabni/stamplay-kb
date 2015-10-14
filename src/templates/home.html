@@ -30,16 +30,16 @@
                 <ul class="collection"
                     style="border:none;">
                     <li class="collection-item avatar"
-                        ng-repeat="question in questionCollection">
+                        ng-repeat="question in questionCollection | orderBy : dt_create : true"
+                        ui-sref="Question Details({id : question.instance._id})">
                         <img ng-src="{{question.instance.owner.profileImg}}"
-                             class="circle"
-                             ui-sref="User Profile({id : question.instance.owner._id})">
+                             class="circle">
                         <a class="secondary-content text-secondary">
-                            <span class='upvote'>{{question.instance.actions.votes.total}}</span>
+                            <span class='upvote'>{{question.instance.actions.votes.users_upvote.length - question.instance.actions.votes.users_downvote.length}}</span>
                             <i class="material-icons">thumb_up</i>
                         </a>
                         <p class="title col s11 truncate"
-                           ui-sref="Question Details({id : question.instance._id})" style="cursor:pointer;">{{question.instance.title}}</p>
+                           style="cursor:pointer;">{{question.instance.title}}</p>
                         <p class="grey-text lightweight truncate col s11"
                            ng-bind-html="question.instance.body"
                            style="max-height:22px">
@@ -53,28 +53,20 @@
         <!--  -->
 
         <!--  -->
-        <!-- QUERY QUESTIONS -->
+        <!-- QUERY QUESTIONS --->
         <!--  -->
         <div class="row" ng-show="question_query.length">
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none;">
-                    <li class="collection-item avatar" ng-repeat="question in searchResults">
-                        <img ng-src="{{question.owner.profileImg || 'http://placehold.it/50x50'}}"
-                             class="circle"
-                             ui-sref="User Profile({id : question.owner})">
-
-                        <a href="#!" class="secondary-content text-secondary">
-                            <span class="upvote">{{question.votes}}</span>
-                            <i class="material-icons">thumb_up</i>
-                        </a>
+                    <li class="collection-item avatar" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
                         <p class="title truncate col s11"
                            ng-bind-html="question._highlightResult.title.value"
-                           ui-sref="Question Details({id : question._id})"
-                           style="cursor:pointer"
-                        ></p>
-                        <p class="grey-text lightweight truncate col s11"
-                           ng-bind-html="question._highlightResult.body.value">
+                           style="cursor:pointer">
+
                         </p>
+                        <div class="grey-text lightweight truncate col s11">
+                            <div ng-bind="htmlToPlaintext(question._highlightResult.body.value)"></div>
+                       </div>
                     </li>
                 </ul>
             </div>

@@ -1,11 +1,11 @@
 
 <div class="row">
-    <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-if="!question">
+    <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-show="!question">
         <div class="progress bg-primary">
              <div class="indeterminate bg-accent"></div>
          </div>
     </div>
-    <div class="col s9" ng-if="question">
+    <div class="col s9" ng-show="question">
         <div class="row  border-accent"
              style="display: flex;align-items: center; padding-bottom:10px; border-bottom: 3px solid red;">
             <div class="col s2 center-align">
@@ -55,10 +55,9 @@
                         ng-click="addSolution(solution, question.instance._id)">Submit Solution
                 </button>
             </div>
-            <br>
             <div>
                 <div class="row"
-                     ng-if="question.instance.solution"
+                     ng-show="question.instance.solution"
                      style="margin-bottom:5px;">
                     <div class="col s12 output-container grey lighten-5"
                          ng-bind-html="question.instance.solution"
@@ -72,7 +71,7 @@
                         </a>
                         <span class="col flow-text"
                               style="font-weight:900;top: -5px;position: relative;"
-                              ng-bind="question.instance.actions.votes.users_upvote.length-question.instance.actions.votes.users_downvote.length">
+                              ng-bind="voteTotal">
 
                         </span>
                         <a class="text-primary col"
@@ -85,7 +84,7 @@
         </div>
         <div class="row"
              style="margin-top:30px">
-                <div class="lightweight flow-text left">
+                <div class="lightweight flow-text col s12 left">
                     Comments({{question.instance.actions.comments.length}})
                 </div>
                 <a class="right btn bg-accent text-primary"
@@ -102,15 +101,15 @@
                     </text-area>
                 </div>
                 <button class="btn bg-secondary col"
-                        ng-click="question.comment(new_comment)">Submit
+                        ng-click="addComment(question, new_comment); show_comment_form = false; question.instance.actions.comments">Submit
                 </button>
             </div>
         </div>
         <div class="row">
             <ul class="collection"
                 style="border:none;">
-                <li class="collection-item avatar left"
-                    ng-repeat="comment in question.instance.actions.comments"
+                <li class="collection-item avatar left col s12"
+                    ng-repeat="comment in comments"
                     style="padding-left:20px">
                     <div class="col center-align">
                         <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}"

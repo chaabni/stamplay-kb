@@ -9,9 +9,10 @@
             <h3 class="text-primary lightweight border-accent col offset-s1">New Question</h3>
             <div class="input-field col s10 offset-s1">
                 <label>What is your question?</label>
-                <input type="text" ng-model="question.title">
+                <input type="text" ng-model="question.title" autofocus>
             </div>
             <div class="input-field col s10 offset-s1">
+                <p>Describe the question in detail.</p>
                 <textarea ui-tinymce="tinymceOptions" ng-model="question.body"></textarea>
             </div>
             <div class="input-field col s10 offset-s1">

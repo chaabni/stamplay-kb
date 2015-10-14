@@ -69,6 +69,18 @@ gulp.task('controllers', function() {
         .pipe(notify({message:"Minified & Bundled Controllers."}));
 });
 
+// Minfies and Concatenates Controller Files
+gulp.task('filters', function() {
+    return gulp.src("src/javascripts/filters/*.js")
+        .pipe(concat('filters.js'))
+        .pipe(gulp.dest("dist/javascripts/filters"))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(uglify({ mangle: false }))
+        .pipe(gulp.dest('dist/javascripts/filters'))
+        .pipe(livereload())
+        .pipe(notify({message:"Minified & Bundled Filters."}));
+});
+
 // Minfies - Removes Comments - Template Files
 gulp.task('templates', function() {
   gulp.src('src/templates/*.html')
@@ -87,6 +99,7 @@ gulp.task('watch', function() {
     gulp.watch(['src/javascripts/modules/*.js'], ['modules']);
     gulp.watch(['src/javascripts/services/*.js'], ['services']);
     gulp.watch(['src/javascripts/controllers/*.js'], ['controllers']);
+    gulp.watch(['src/javascripts/filters/*.js'], ['filters']);
     gulp.watch(['src/templates/*.html'], ['templates']);
     gulp.watch(['src/scss/*.scss'], ['styles']);
 });

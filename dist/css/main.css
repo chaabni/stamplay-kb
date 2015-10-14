@@ -74,7 +74,7 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 
 .upvote {
   position: absolute;
-  left: -10px;
+  right: 30px;
   bottom: 4px;
   display: inline-block;
 }

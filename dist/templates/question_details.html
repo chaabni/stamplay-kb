@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-if="!question">
+    <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-show="!question">
         <div class="progress bg-primary">
              <div class="indeterminate bg-accent"></div>
          </div>
     </div>
-    <div class="col s9" ng-if="question">
+    <div class="col s9" ng-show="question">
         <div class="row border-accent" style="display: flex;align-items: center; padding-bottom:10px; border-bottom: 3px solid red">
             <div class="col s2 center-align">
                 <img ng-src="{{question.instance.owner.profileImg}}" class="img-responsive" style="border-radius:50%">
@@ -41,9 +41,8 @@
                 <button class="btn bg-accent col offset-s1 text-primary" ng-click="addSolution(solution, question.instance._id)">Submit Solution
                 </button>
             </div>
-            <br>
             <div>
-                <div class="row" ng-if="question.instance.solution" style="margin-bottom:5px">
+                <div class="row" ng-show="question.instance.solution" style="margin-bottom:5px">
                     <div class="col s12 output-container grey lighten-5" ng-bind-html="question.instance.solution" style="margin:20px 0;padding:20px">
                     </div>
                     <div class="right col s12">
@@ -51,7 +50,7 @@
                         <a class="text-primary col" ng-click="upvoteSolution(question)">
                             <i class="material-icons">thumb_up</i>
                         </a>
-                        <span class="col flow-text" style="font-weight:900;top: -5px;position: relative" ng-bind="question.instance.actions.votes.users_upvote.length-question.instance.actions.votes.users_downvote.length">
+                        <span class="col flow-text" style="font-weight:900;top: -5px;position: relative" ng-bind="voteTotal">
 
                         </span>
                         <a class="text-primary col" ng-click="downvoteSolution(question)">
@@ -62,7 +61,7 @@
             </div>
         </div>
         <div class="row" style="margin-top:30px">
-                <div class="lightweight flow-text left">
+                <div class="lightweight flow-text col s12 left">
                     Comments({{question.instance.actions.comments.length}})
                 </div>
                 <a class="right btn bg-accent text-primary" ng-click="show_comment_form = !show_comment_form" ng-hide="show_comment_form">Add Comment
@@ -73,13 +72,13 @@
                     <textarea type="text" class="materialize-textarea" ng-model="new_comment">
                     
                 </textarea></div>
-                <button class="btn bg-secondary col" ng-click="question.comment(new_comment)">Submit
+                <button class="btn bg-secondary col" ng-click="addComment(question, new_comment); show_comment_form = false; question.instance.actions.comments">Submit
                 </button>
             </div>
         </div>
         <div class="row">
             <ul class="collection" style="border:none">
-                <li class="collection-item avatar left" ng-repeat="comment in question.instance.actions.comments" style="padding-left:20px">
+                <li class="collection-item avatar left col s12" ng-repeat="comment in comments" style="padding-left:20px">
                     <div class="col center-align">
                         <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}" class="img-responsive" ui-sref="User Profile({id : comment.userId})" style="border-radius:50%">
                     </div>
