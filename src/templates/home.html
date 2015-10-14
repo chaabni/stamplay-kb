@@ -59,7 +59,7 @@
                         </a>
                         <p class="title truncate col s11"
                            ng-bind-html="question._highlightResult.title.value"
-                           ui-sref="Question Details({id : question.instance._id})"
+                           ui-sref="Question Details({id : question._id})"
                            style="cursor:pointer"
                         ></p>
                         <p class="grey-text lightweight truncate col s11"
@@ -80,7 +80,7 @@
         <div  style="min-height:70vh;">
             <h4 class="lightweight center-align" style="padding:10px;">Join Our Slack Community</h4>
             <div class="input-field col s10 offset-s1">
-                <input type="email" placeholder="Email">
+                <input type="email" class="input-primary" placeholder="Email">
             </div>
             <div class="input-field col s10 offset-s1">
                 <input type="submit" class="btn right bg-accent text-primary" value="Join">

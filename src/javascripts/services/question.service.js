@@ -1,11 +1,9 @@
 angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", function($q, $stamplay, algolia) {
-    var question = $stamplay.Cobject("question").Model;
-    var user = $stamplay.User().Model;
-    var questionCollection = $stamplay.Cobject("question").Collection;
     var client = algolia.Client('7TMV8F22UN', 'b5e5aa05c764aa1718bc96b793078703');
     var index = client.initIndex('KBQUESTIONS');
     return {
         newQuestion : function(details) {
+            var question = $stamplay.Cobject("question").Model;
             var q = $q.defer();
             question.set("title", details.title);
             question.set("body", details.body);
@@ -15,6 +13,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             return q.promise;
         },
         getQuestions : function() {
+            var questionCollection = $stamplay.Cobject("question").Collection;
             var q = $q.defer();
             questionCollection.populateOwner().fetch().then(function() {
                 q.resolve(questionCollection);
@@ -32,11 +31,27 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
                 return q.promise;
         },
         getQuestionDetails : function(id) {
+            var question = $stamplay.Cobject("question").Model;
+            var user = $stamplay.User().Model;
             var q = $q.defer();
             question.fetch(id).then(function() {
                 user.fetch(question.instance.owner).then(function() {
                     question.instance.owner = user.instance;
                     q.resolve(question);
+                })
+            })
+            return q.promise;
+        },
+        addSolution : function(solution, id) {
+            var question = $stamplay.Cobject("question").Model;
+            var q = $q.defer();
+            question.fetch(id).then(function() {
+                question.set("solution", solution);
+                question.save().then(function(){
+                    console.log(question.instance);
+                    q.resolve(question);
+                }, function(err) {
+                    console.log(err);
                 })
             })
             return q.promise;
