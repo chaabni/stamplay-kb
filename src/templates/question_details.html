@@ -87,10 +87,12 @@
                 <div class="lightweight flow-text col s12 left">
                     Comments({{question.instance.actions.comments.length}})
                 </div>
-                <a class="right btn bg-accent text-primary"
-                   ng-click="show_comment_form = !show_comment_form"
-                   ng-hide="show_comment_form || !currentUser">Add Comment
-                </a>
+                <span  ng-hide="!currentUser">
+                    <a class="right btn bg-accent text-primary"
+                       ng-click="show_comment_form = !show_comment_form"
+                       ng-hide="show_comment_form">Add Comment
+                    </a>
+                </span>
             <div class="col s12"
                  ng-show="show_comment_form">
                 <div class="input-field col s12" >
