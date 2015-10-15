@@ -30,6 +30,7 @@ angular.module("app")
 
     QuestionService.getQuestions().then(function(questions) {
         if(questions.instance.length) {
+            $scope.noResults = false;
             $scope.questionCollection = questions.instance;
         } else {
             $scope.questionCollection = [];
@@ -40,9 +41,11 @@ angular.module("app")
     $scope.searchQuestions = function() {
         QuestionService.searchQuestions($scope.question_query).then(function(questions) {
             if(questions.hits.length) {
+                $scope.noSearchResults = false;
                 $scope.searchResults = questions.hits;
             } else {
                 $scope.noSearchResults = true;
+                $scope.searchResults = [];
             }
 
         })
