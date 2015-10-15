@@ -23,7 +23,7 @@
         <div class="row" style="margin-bottom:5px;border-bottom:3px solid #232946">
             <div class="lightweight flow-text col s12">Solution</div>
             <br>
-            <button ng-show="!question.instance.solution && !solution_form" ng-click="solution_form = !solution_form" class="right col btn bg-secondary text-white">Add Solution
+            <button ng-show="!question.instance.solution && !solution_form && currentUser" ng-click="solution_form = !solution_form" class="right col btn bg-secondary text-white">Add Solution
             </button>
             <div ng-if="!question.instance.solution && !solution_form">
                 <p class="grey-text text-lighten-1 col">
@@ -64,7 +64,7 @@
                 <div class="lightweight flow-text col s12 left">
                     Comments({{question.instance.actions.comments.length}})
                 </div>
-                <a class="right btn bg-accent text-primary" ng-click="show_comment_form = !show_comment_form" ng-hide="show_comment_form">Add Comment
+                <a class="right btn bg-accent text-primary" ng-click="show_comment_form = !show_comment_form" ng-hide="show_comment_form || !currentUser">Add Comment
                 </a>
             <div class="col s12" ng-show="show_comment_form">
                 <div class="input-field col s12">
