@@ -82,7 +82,7 @@
             <ul class="collection" style="border:none">
                 <li class="collection-item avatar left col s12" ng-repeat="comment in comments" style="padding-left:20px">
                     <div class="col center-align">
-                        <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}" class="img-responsive" ui-sref="User Profile({id : comment.userId})" style="border-radius:50%">
+                        <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}" class="img-responsive" ui-sref="User Profile({id : comment.userId})" style="border-radius:50%;height:50px">
                     </div>
                     <div class="col center-align">
                          <div>{{comment.displayName}}</div>
