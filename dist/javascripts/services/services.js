@@ -25,13 +25,6 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
     }
 }])
 
-angular.module("app")
-    .factory("HomeService", [function() {
-        return {
-            test : "Hello!"
-        }
-}])
-
 angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", function($q, $stamplay, algolia) {
     var client = algolia.Client('7TMV8F22UN', 'b5e5aa05c764aa1718bc96b793078703');
     var index = client.initIndex('KBQUESTIONS');
@@ -49,7 +42,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
         getQuestions : function() {
             var questionCollection = $stamplay.Cobject("question").Collection;
             var q = $q.defer();
-            questionCollection.populateOwner().fetch().then(function() {
+            questionCollection.populateOwner().limit(25).fetch().then(function() {
                 q.resolve(questionCollection);
             })
             return q.promise;

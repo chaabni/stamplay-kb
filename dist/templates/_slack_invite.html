@@ -1,10 +1,11 @@
-<div style="min-height:70vh">
+<div style="min-height:70vh" ng-controller="SlackInviteController">
         <h4 class="lightweight center-align" style="padding:10px">Join Our Slack Community</h4>
         <div class="input-field col s10 offset-s1">
-            <input type="email" class="input-primary" placeholder="Email">
+            <input type="text" class="input-primary" placeholder="Email" ng-model="email">
         </div>
         <div class="input-field col s10 offset-s1">
-            <input type="submit" class="btn right bg-accent text-primary" value="Join">
+            <button class="btn col s12 right bg-accent text-primary" ng-click="request_invite()">Request Invite
+           </button>
         </div>
         <div class="col s10 offset-s1">
             <p>We will send you an invite to join our great slack community where you can talk with other Stamplayers, and get help!</p>

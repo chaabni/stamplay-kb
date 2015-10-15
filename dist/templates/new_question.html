@@ -1,23 +1,19 @@
 <div class="row">
-    <div class="col">
-
-    </div>
-</div>
-<div class="row">
-    <div class="col s10">
-        <form ng-submit="newQuestion()" class="col s10" style="padding:10px">
-            <h3 class="text-primary lightweight border-accent col offset-s1">New Question</h3>
-            <div class="input-field col s10 offset-s1">
+    <div class="col s9">
+        <form ng-submit="newQuestion()" style="padding:10px">
+            <h3 class="text-primary lightweight border-accent">New Question</h3>
+            <div class="input-field">
                 <label>What is your question?</label>
                 <input type="text" ng-model="question.title" autofocus>
             </div>
-            <div class="input-field col s10 offset-s1">
+            <div class="input-field">
                 <p>Describe the question in detail.</p>
                 <textarea ui-tinymce="tinymceOptions" ng-model="question.body"></textarea>
             </div>
-            <div class="input-field col s10 offset-s1">
+            <div class="input-field">
                 <input type="submit" class="btn bg-accent text-secondary" value="Post Question">
             </div>
         </form>
     </div>
+    <div class="col s3" ng-include="'./dist/templates/_slack_invite.html'"></div>
 </div>

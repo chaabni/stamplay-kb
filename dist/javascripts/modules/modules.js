@@ -16,11 +16,6 @@ angular.module("app", ["ui.router", "ngStamplay", "ngSanitize", "algoliasearch",
             templateUrl: "dist/templates/question_details.html",
             controller: "QuestionDetailsController"
         })
-        .state("User Profile", {
-            url: "/profile/:id",
-            templateUrl: "dist/templates/user_profile.html"
-        })
-
     $urlRouterProvider.otherwise("/");
 }])
 .run(["$stamplay", "$rootScope", "AccountService", function($stamplay, $rootScope, AccountService) {

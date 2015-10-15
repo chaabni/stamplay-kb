@@ -15,7 +15,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
         getQuestions : function() {
             var questionCollection = $stamplay.Cobject("question").Collection;
             var q = $q.defer();
-            questionCollection.populateOwner().fetch().then(function() {
+            questionCollection.populateOwner().limit(25).fetch().then(function() {
                 q.resolve(questionCollection);
             })
             return q.promise;
