@@ -2,12 +2,22 @@ angular.module("app")
     .controller("HomeController", ["$scope", "$state", "$sce", "QuestionService", function($scope, $state, $sce, QuestionService) {
 
     QuestionService.getQuestions().then(function(questions) {
-        $scope.questionCollection = questions.instance;
+        if(questions.instance.length) {
+            $scope.questionCollection = questions.instance;
+        } else {
+            $scope.questionCollection = [];
+            $scope.noResults = true;
+        }
     })
 
     $scope.searchQuestions = function() {
         QuestionService.searchQuestions($scope.question_query).then(function(questions) {
-            $scope.searchResults = questions.hits;
+            if(questions.hits.length) {
+                $scope.searchResults = questions.hits;
+            } else {
+                $scope.noSearchResults = true;
+            }
+
         })
     }
 

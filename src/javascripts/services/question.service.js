@@ -48,7 +48,6 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             question.fetch(id).then(function() {
                 question.set("solution", solution);
                 question.save().then(function(){
-                    console.log(question.instance);
                     q.resolve(question);
                 }, function(err) {
                     console.log(err);

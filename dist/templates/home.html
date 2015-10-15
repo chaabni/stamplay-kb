@@ -16,6 +16,7 @@
         
         
         <div class="row" ng-hide="question_query">
+             <div ng-show="noResults" class="center-align grey-text">No Questions Have Been Posted Yet, Sign In To Post a Question</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
                     <li class="collection-item avatar" ng-repeat="question in questionCollection | orderBy : dt_create : true" ui-sref="Question Details({id : question.instance._id})">
@@ -39,6 +40,7 @@
         
         
         <div class="row" ng-show="question_query.length">
+            <div ng-show="noSearchResults" class="center-align grey-text">No results found matching, <b>{{question_query}}</b>. Please try another search.</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
                     <li class="collection-item avatar" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
@@ -59,6 +61,6 @@
     <div class="col s3" ng-include="'./dist/templates/_slack_invite.html'" style="position:fixed;right:0">
     </div>
 </div>
-<div class="progress bg-primary" ng-if="!questionCollection" style="position:fixed;bottom:-15px;left:0">
+<div class="progress bg-primary" ng-hide="questionCollection" style="position:fixed;bottom:-15px;left:0">
     <div class="indeterminate bg-accent"></div>
 </div>

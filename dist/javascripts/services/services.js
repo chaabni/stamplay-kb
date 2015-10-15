@@ -4,7 +4,7 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
         login : function() {
             var q = $q.defer();
             // SWITCH TO GITHUB
-            user.login('github').then(function() {
+            user.login('facebook').then(function() {
                 q.resolve(user.instance);
             })
             return q.promise;
@@ -75,7 +75,6 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             question.fetch(id).then(function() {
                 question.set("solution", solution);
                 question.save().then(function(){
-                    console.log(question.instance);
                     q.resolve(question);
                 }, function(err) {
                     console.log(err);
