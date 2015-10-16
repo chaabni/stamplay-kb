@@ -4,7 +4,7 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
         login : function() {
             var q = $q.defer();
             // SWITCH TO GITHUB
-            user.login('github').then(function() {
+            user.login('facebook').then(function() {
                 q.resolve(user.instance);
             })
             return q.promise;
@@ -12,7 +12,7 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
         logout : function() {
             var q = $q.defer();
             // SWITCH TO GITHUB
-            user.logout('github');
+            user.logout('facebook');
             return q.promise;
         },
         currentUser : function() {
@@ -34,6 +34,8 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             var q = $q.defer();
             question.set("title", details.title);
             question.set("body", details.body);
+            question.set("owner_email", details.owner_email)
+            question.set("solution_provided", "false")
             question.save().then(function() {
                 q.resolve(question.instance);
             })
@@ -74,6 +76,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             var q = $q.defer();
             question.fetch(id).then(function() {
                 question.set("solution", solution);
+                question.set("solution_provided", "true")
                 question.save().then(function(){
                     q.resolve(question);
                 }, function(err) {
