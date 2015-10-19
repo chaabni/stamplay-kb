@@ -4,7 +4,7 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
         login : function() {
             var q = $q.defer();
             // SWITCH TO GITHUB
-            user.login('facebook').then(function() {
+            user.login('github').then(function() {
                 q.resolve(user.instance);
             })
             return q.promise;
@@ -12,7 +12,7 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
         logout : function() {
             var q = $q.defer();
             // SWITCH TO GITHUB
-            user.logout('facebook');
+            user.logout('github');
             return q.promise;
         },
         currentUser : function() {
