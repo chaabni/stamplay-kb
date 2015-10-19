@@ -1,137 +1,167 @@
-
 <div class="row">
-    <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-show="!question">
-        <div class="progress bg-primary">
-             <div class="indeterminate bg-accent"></div>
-         </div>
-    </div>
-    <div class="col s9" ng-show="question">
-        <div class="row  border-accent"
-             style="display: flex;align-items: center; padding-bottom:10px; border-bottom: 3px solid red;">
-            <div class="col s2 center-align">
-                <img ng-src="{{question.instance.owner.profileImg}}"
-                     class="img-responsive"
-                     style="border-radius:50%;height:50px">
-                <div>{{question.instance.owner.displayName}}</div>
-                <div>{{ question.instance.dt_create | date:"shortDate"}}</div>
-                <div>{{ question.instance.dt_create | date:"shortTime"}}</div>
-            </div>
-            <p class="flow-text col s10"
-               style="border-left:3px solid #efefef">{{question.instance.title}}
-            </p>
-        </div>
-        <div class="row" style="border-bottom:3px solid #ababab">
-            <div class="lightweight flow-text col s12">Description</div>
-            <div class="col s12 grey lighten-5 output-container"
-               ng-bind-html="question.instance.body">
-           </div>
-        </div>
-        <div class="row"
-             style="margin-bottom:5px;border-bottom:3px solid #232946">
-            <div class="lightweight flow-text col s12">Solution</div>
-            <br>
-            <button ng-show="!question.instance.solution && !solution_form && currentUser"
-                    ng-click="solution_form = !solution_form"
-                    class="right col btn bg-secondary text-white">Add Solution
-            </button>
-            <div ng-if="!question.instance.solution && !solution_form">
-                <p class="grey-text text-lighten-1 col">
-                    A solution has not been submitted yet. Know the answer? Add the solution.
-                </p>
-            </div>
-            <br>
-            <div class="row"
-                 ng-show="solution_form"
-                 style="margin-bottom:5px;">
-                <div class="input-field col s12 card" >
-                    <label>What is the solution?</label>
-                    <textarea type="text"
-                              ui-tinymce="tinymceOptions"
-                              ng-model="solution">
-                    </textarea>
-                    <br>
-                </div>
-                <button class="btn bg-accent col text-primary"
-                        ng-click="addSolution(solution, question.instance._id)">Submit Solution
-                </button>
-            </div>
-            <div>
-                <div class="row"
-                     ng-show="question.instance.solution"
-                     style="margin-bottom:5px;">
-                    <div class="col s12 output-container grey lighten-5"
-                         ng-bind-html="question.instance.solution"
-                         style="margin:20px 0;padding:20px">
-                    </div>
-                    <div class="right col s12">
-                        <p class="col lightweight grey lighten-2" style="margin-top:5px; border-radius:4px;">Was this solution helpful?</p>
-                        <a class="text-primary col"
-                           ng-click="upvoteSolution(question)">
-                            <i class="material-icons">thumb_up</i>
-                        </a>
-                        <span class="col flow-text"
-                              style="font-weight:900;top: -5px;position: relative;"
-                              ng-bind="voteTotal">
-
-                        </span>
-                        <a class="text-primary col"
-                           ng-click="downvoteSolution(question)">
-                            <i class="material-icons">thumb_down</i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row"
-             style="margin-top:30px">
-                <div class="lightweight flow-text col s12 left">
-                    Comments({{question.instance.actions.comments.length}})
-                </div>
-                <span  ng-hide="!currentUser">
-                    <a class="right btn bg-accent text-primary"
-                       ng-click="show_comment_form = !show_comment_form"
-                       ng-hide="show_comment_form">Add Comment
-                    </a>
-                </span>
-            <div class="col s12"
-                 ng-show="show_comment_form">
-                <div class="input-field col s12" >
-                    <label>Leave A Comment</label>
-                    <textarea type="text"
-                              class="materialize-textarea"
-                              ng-model="new_comment">
-                    </text-area>
-                </div>
-                <button class="btn bg-secondary col"
-                        ng-click="addComment(question, new_comment); show_comment_form = false; question.instance.actions.comments">Submit
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <ul class="collection"
-                style="border:none;">
-                <li class="collection-item avatar left col s12"
-                    ng-repeat="comment in comments"
-                    style="padding-left:20px">
-                    <div class="col center-align">
-                        <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}"
-                             class="img-responsive"
-                             ui-sref="User Profile({id : comment.userId})"
-                             style="border-radius:50%;height:50px">
-                    </div>
-                    <div class="col center-align">
-                         <div>{{comment.displayName}}</div>
-                         <div>{{ comment.dt_create | date:"shortDate"}}</div>
-                         <div>{{ comment.dt_create | date:"shortTime"}}</div>
-                     </div>
-                     <p class="col s8"
-                        style="border-left:3px solid #efefef">{{comment.text}}</p>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col s3"
-         ng-include="'./dist/templates/_slack_invite.html'"
-         style="position:fixed;right:0;">
-    </div>
+  <div class="col s9 ng-cloak" style="border-bottom: 1px solid #eee;">
+    <ul class="tabs">
+      <li class="tab col s3"><a class="active text-primary" href="#question">Question</a></li>
+      <li class="tab col s3">
+          <a class="text-primary" href="#solution">Solution
+            <span ng-class="{'chip':voteTotal}" ng-show="voteTotal !== 0">
+                <span>{{voteTotal}}</span>
+                <i ng-show="voteTotal > 0" class="material-icons tiny">thumb_up</i>
+                <i ng-show='voteTotal < 0' class="material-icons tiny">thumb_down</i>
+            </span>
+          </a>
+      </li>
+      <li class="tab col s3">
+          <a class="text-primary" href="#comments">Comments
+              <span ng-class="{'chip':voteTotal}">
+                  {{question.instance.actions.comments.length}}
+              </span>
+          </a>
+      </li>
+    </ul>
+  </div>
+  <div class="col s3"
+       ng-include="'./dist/templates/_slack_invite.html'"
+       style="position:fixed;right:0;">
+  </div>
 </div>
+<div class="row" style="padding:0 25px 25px 25px;">
+  <div class="col s9" style="height:80vh;display:flex; align-items:center" ng-show="!question">
+    <div class="progress bg-primary">
+      <div class="indeterminate bg-accent"></div>
+    </div>
+  </div>
+  <div id="question" class="col s9" ng-show="question">
+      <div class="row border-accent-grey tab-heading"
+           style="display: flex;align-items: center;">
+          <div class="col s3 center-align">
+              <img ng-src="{{question.instance.owner.profileImg}}"
+                   class="img-responsive"
+                   style="border-radius:50%;height:50px;">
+              <div>{{question.instance.owner.displayName}}</div>
+              <div>{{ question.instance.dt_create | date:"shortDate"}}</div>
+              <div>{{ question.instance.dt_create | date:"shortTime"}}</div>
+          </div>
+          <p class="flow-text col s9">{{question.instance.title}}
+          </p>
+      </div>
+      <div class="row">
+          <!-- <div class="lightweight flow-text col s3 center-align">Description</div> -->
+          <div class="col s12 grey lighten-5 output-container"
+             ng-bind-html="question.instance.body">
+         </div>
+      </div>
+  </div>
+  <div id="solution" class="col s9">
+      <div ng-show="question.instance.solution">
+      <div class="row border-accent-grey">
+           <div class="lightweight flow-text col s3 center-align">Solution</div>
+
+          <div class="col right">
+              <p class="col lightweight grey lighten-2" style="margin-top:5px; border-radius:4px;">Was this solution helpful?</p>
+              <a class="text-primary col"
+                 ng-click="upvoteSolution(question)">
+                  <i class="material-icons">thumb_up</i>
+              </a>
+              <span class="col flow-text"
+                    style="font-weight:900;top: -5px;position: relative;"
+                    ng-bind="voteTotal">
+
+              </span>
+              <a class="text-primary col"
+                 ng-click="downvoteSolution(question)">
+                  <i class="material-icons">thumb_down</i>
+              </a>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12 grey lighten-5 output-container"
+               ng-bind-html="question.instance.solution"
+               style="margin:20px 0;padding:20px">
+          </div>
+      </div>
+      </div>
+      <div class="row">
+          <button ng-show="!question.instance.solution && !solution_form && currentUser"
+                  ng-click="solution_form = !solution_form"
+                  class="right col btn bg-secondary text-white">Add Solution
+          </button>
+          <div ng-if="!question.instance.solution && !solution_form">
+              <p class="grey-text text-lighten-1 col">
+                  A solution has not been submitted yet. Know the answer? Add the solution.
+              </p>
+          </div>
+          <div class="row"
+               ng-show="solution_form"
+               style="margin-bottom:5px;">
+              <div class="input-field col s12 card" >
+                  <label>What is the solution?</label>
+                  <textarea type="text"
+                            ui-tinymce="tinymceOptions"
+                            ng-model="solution">
+                  </textarea>
+                  <br>
+              </div>
+              <button class="btn bg-accent col text-primary"
+                      ng-click="addSolution(solution, question.instance._id)">Submit Solution
+              </button>
+          </div>
+      </div>
+  </div>
+  <div id="comments" class="col s9">
+      <div class="row border-accent-grey tab-heading">
+          <div class="lightweight flow-text center-align col s3 left">
+              Comments
+          </div>
+          <div  ng-hide="!currentUser">
+              <a class="right btn bg-accent"
+                 ng-click="show_comment_form = !show_comment_form"
+                 ng-hide="show_comment_form">Add Comment
+              </a>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col s12"
+               ng-show="show_comment_form">
+              <div class="input-field col s12" >
+                  <label>Leave A Comment</label>
+                  <textarea type="text"
+                            class="materialize-textarea"
+                            ng-model="new_comment">
+                  </text-area>
+              </div>
+              <button class="btn bg-secondary col"
+                      ng-click="addComment(question, new_comment); show_comment_form = false; question.instance.actions.comments">Submit
+              </button>
+          </div>
+      </div>
+      <div class="row">
+          <ul class="collection"
+              style="border:none;">
+              <li class="collection-item avatar left col s12"
+                  ng-repeat="comment in comments"
+                  style="padding-left:20px">
+                  <div class="col center-align">
+                      <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}"
+                           class="img-responsive"
+                           ui-sref="User Profile({id : comment.userId})"
+                           style="border-radius:50%;height:50px">
+                  </div>
+                  <div class="col center-align">
+                       <div>{{comment.displayName}}</div>
+                       <div>{{ comment.dt_create | date:"shortDate"}}</div>
+                       <div>{{ comment.dt_create | date:"shortTime"}}</div>
+                   </div>
+                   <p class="col s8"
+                      style="border-left:3px solid #efefef">{{comment.text}}</p>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('ul.tabs').tabs();
+    });
+</script>

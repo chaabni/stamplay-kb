@@ -58,7 +58,7 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 }
 #search-bar {
     width:50px;
-    transition:all ease-out 0.25s 8.5s;
+    transition:all ease-out 0.25s 5s;
     &.input-field {
         margin-top:0;
     }
@@ -81,6 +81,9 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 #search-bar:hover {
     width:50%;
     transition:all ease-in 0.2s 0s;
+}
+#search-bar:focus {
+    width:50% !important;
 }
 
 .collection-item{
@@ -119,6 +122,18 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
     align-items: center;
 }
 
+.tab-heading {
+    padding-bottom: 20px;
+}
+
+.border-accent-grey {
+    border-bottom: 3px solid #dddddd;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+.tabs .indicator{
+    background-color: $secondary-color;
 }
