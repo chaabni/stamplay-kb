@@ -135,12 +135,8 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
           align-items: center;
 }
 
-.tab-heading {
-  padding-bottom: 20px;
-}
-
 .border-accent-grey {
-  border-bottom: 3px solid #dddddd;
+  border-bottom: 3px solid #fafafa;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
