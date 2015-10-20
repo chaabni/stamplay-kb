@@ -14,9 +14,9 @@ In this project we’ll show you how to build a community platform that:
 
 [This is what you'll build](https://stamplaykb.stamplayapp.com/#/).
 
-![picture alt](https://blog.stamplay.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-19-at-8.50.21-AM.png "Community Dashoard")
+![picture alt](https://blog.stamplay.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-20-at-8.37.36-AM.png "Community Dashoard")
 
-![picture alt](https://blog.stamplay.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-19-at-8.52.03-AM.png "Question Details View")
+![picture alt](https://blog.stamplay.com/wp-content/uploads/2015/10/Screen-Shot-2015-10-20-at-8.37.49-AM.png "Question Details View")
 
 
 
