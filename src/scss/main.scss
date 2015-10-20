@@ -2,6 +2,18 @@ html, body {
     min-height: 100vh;
 }
 
+.cursor {
+    cursor: pointer;
+}
+.vote-icon {
+    &:hover {
+        opacity: 0.5;
+    }
+    &:active {
+        opacity: 0.8;
+    }
+}
+
 // Colors
 
 $primary-color:#272D4E;

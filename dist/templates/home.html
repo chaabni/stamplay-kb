@@ -19,7 +19,7 @@
              <div ng-show="noResults" class="center-align grey-text">No Questions Have Been Posted Yet, Sign In To Post a Question</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
-                    <li class="collection-item avatar" ng-repeat="question in questionCollection | orderBy : dt_create : true" ui-sref="Question Details({id : question.instance._id})">
+                    <li class="collection-item avatar cursor" ng-repeat="question in questionCollection | orderBy : dt_create : true" ui-sref="Question Details({id : question.instance._id})">
                         <img ng-src="{{question.instance.owner.profileImg}}" class="circle">
                         <a class="secondary-content text-secondary">
                             <span class="upvote">{{question.instance.actions.votes.users_upvote.length - question.instance.actions.votes.users_downvote.length}}</span>

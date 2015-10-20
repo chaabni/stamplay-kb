@@ -30,7 +30,7 @@
             <div style="min-height:70vh">
                 <ul class="collection"
                     style="border:none;">
-                    <li class="collection-item avatar"
+                    <li class="collection-item avatar cursor"
                         ng-repeat="question in questionCollection | orderBy : dt_create : true"
                         ui-sref="Question Details({id : question.instance._id})">
                         <img ng-src="{{question.instance.owner.profileImg}}"

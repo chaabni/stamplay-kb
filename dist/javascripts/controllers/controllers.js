@@ -66,7 +66,7 @@ angular.module("app")
     QuestionService.getQuestionDetails($stateParams.id).then(function(question) {
         $scope.question = question;
         $scope.comments = question.instance.actions.comments;
-        $scope.voteTotal = question.instance.actions.votes.users_upvote.length - question.instance.actions.votes.users_downvote.length;
+        $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;
 
     })
 
@@ -79,30 +79,30 @@ angular.module("app")
     }
 
     $scope.upvoteSolution = function(question) {
-        var vote = question.instance.actions.votes.users.indexOf($rootScope.currentUser._id);
-        if(vote > -1) {
-            Materialize.toast("You already voted!", 1000)
-        } else {
+        if($rootScope.currentUser) {
             question.upVote().then(function() {
                 Materialize.toast("You found this helpful huh? Great!", 2000)
-                $scope.voteTotal = $scope.voteTotal + 1;
-                $scope.$apply();
+                $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;                $scope.$apply();
+            }, function() {
+                Materialize.toast("Sorry, only one vote per solution.", 2000)
             })
+        } else {
+            Materialize.toast("Please login to vote.", 2000)
         }
     }
 
     $scope.downvoteSolution = function(question) {
-        var vote = question.instance.actions.votes.users.indexOf($rootScope.currentUser._id);
-        if(vote > -1) {
-            Materialize.toast("You already voted!", 1000)
-        } else {
+        if($rootScope.currentUser) {
             question.downVote().then(function() {
-                Materialize.toast("This wasn't helpful, we are sorry to hear that?", 2000)
-                $scope.voteTotal = $scope.voteTotal - 1;
+                Materialize.toast("This wasn't helpful? We are sorry to hear that.", 2000)
+                $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;
                 $scope.$apply();
+            }, function() {
+                Materialize.toast("Sorry, only one vote per solution.", 2000)
             })
+        } else {
+            Materialize.toast("Please login to vote.", 2000)
         }
-
     }
 
     $scope.addComment = function(question, comment) {
