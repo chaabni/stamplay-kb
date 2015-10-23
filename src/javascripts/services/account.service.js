@@ -3,11 +3,11 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
     return {
         login : function() {
             // SWITCH TO GITHUB
-            user.login('google')
+            user.login('github')
         },
         logout : function() {
             // SWITCH TO GITHUB
-            user.logout('google');
+            user.logout('github');
         },
         currentUser : function() {
             var q = $q.defer();
