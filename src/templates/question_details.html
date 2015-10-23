@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col s9 ng-cloak" style="border-bottom: 1px solid #eee;">
     <ul class="tabs">
-      <li class="tab col s3"><a class="active text-primary" href="#question">Question</a></li>
+      <li class="tab col s3"><a class="text-primary" href="#question">Question</a></li>
       <li class="tab col s3">
           <a class="text-primary" href="#solution">Solution
-            <span ng-class="{'chip':voteTotal}" ng-show="voteTotal !== 0">
-                <span>{{voteTotal}}</span>
+            <span ng-class="{'chip':voteTotal}" ng-show="voteTotal">
+                <span>{{voteTotal || '0'}}</span>
                 <i ng-show="voteTotal > 0" class="material-icons tiny">thumb_up</i>
                 <i ng-show='voteTotal < 0' class="material-icons tiny">thumb_down</i>
             </span>
@@ -13,7 +13,7 @@
       </li>
       <li class="tab col s3">
           <a class="text-primary" href="#comments">Comments
-              <span ng-class="{'chip':voteTotal}">
+              <span ng-class="{'chip': question.instance.actions.comments.length}">
                   {{question.instance.actions.comments.length}}
               </span>
           </a>
@@ -54,7 +54,7 @@
 
   </div>
   <div id="solution" class="col s9">
-      <div ng-show="question.instance.solution">
+      <div ng-show="question_solution">
       <div class="row border-accent-grey">
           <h5 class="lightweight col s3 center-align">Solution</h5>
           <div class="col right">
@@ -76,23 +76,30 @@
       </div>
       <div class="row">
           <div class="col s12 grey lighten-5 output-container"
-               ng-bind-html="question.instance.solution"
+               ng-bind-html="question_solution.instance.description"
                style="margin:20px 0;padding:20px">
+          </div>
+          <div class="col s12">
+              <div class="right grey-text text-lighten-1" style="font-size:12px;">
+                  <span>Solution provided by <span class="grey-text">{{question_solution.instance.owner.displayName}}</span></span>
+                  <span> on <span class="grey-text">{{ question_solution.instance.dt_create | date:"shortDate"}}</span></span>
+                  <span>@ <span class="grey-text">{{ question_solution.instance.dt_create | date:"shortTime"}}</span></span>
+              </div>
           </div>
       </div>
       </div>
       <div class="row">
-          <button ng-show="!question.instance.solution && !solution_form && currentUser"
+          <button ng-show="!question_solution && !solution_form && currentUser"
                   ng-click="solution_form = !solution_form"
                   class="right col btn bg-secondary text-white">Add Solution
           </button>
-          <div ng-if="!question.instance.solution && !solution_form">
+          <div ng-if="!question_solution && !solution_form">
               <p class="grey-text text-lighten-1 col">
                   A solution has not been submitted yet. Know the answer? Add the solution.
               </p>
           </div>
           <div class="row"
-               ng-show="solution_form">
+               ng-show="solution_form && !processing_solution">
               <div class="input-field col s12 card" >
                   <label>What is the solution?</label>
                   <textarea type="text"
@@ -104,6 +111,11 @@
               <button class="btn bg-accent col text-primary"
                       ng-click="addSolution(solution, question.instance._id)">Submit Solution
               </button>
+          </div>
+          <div class="col s12" style="height:80vh;display:flex; align-items:center" ng-show="processing_solution">
+            <div class="progress bg-primary">
+              <div class="indeterminate bg-accent"></div>
+            </div>
           </div>
       </div>
   </div>
@@ -140,16 +152,16 @@
       <div class="row">
           <ul class="collection"
               style="border:none;">
-              <li class="collection-item avatar left col s12"
+              <li class="collection-item avatar left col s12 valign-wrapper"
                   ng-repeat="comment in comments"
                   style="padding-left:20px">
-                  <div class="col center-align">
+                  <div class="col center-align valign">
                       <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}"
                            class="img-responsive"
                            ui-sref="User Profile({id : comment.userId})"
                            style="border-radius:50%;height:50px">
                   </div>
-                  <div class="col center-align">
+                  <div class="col center-align valign">
                        <div>{{comment.displayName}}</div>
                        <div>{{ comment.dt_create | date:"shortDate"}}</div>
                        <div>{{ comment.dt_create | date:"shortTime"}}</div>
@@ -161,9 +173,3 @@
       </div>
   </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('ul.tabs').tabs();
-    });
-</script>

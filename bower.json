@@ -21,7 +21,7 @@
     "angular-ui-router": "~0.2.15",
     "angular-stamplay": "*",
     "angular-ui-tinymce": "latest",
-    "stamplay-js-sdk": "stamplay-sdk#~1.2.9",
-    "Materialize": "materialize#~0.97.1"
+    "Materialize": "materialize#~0.97.1",
+    "stamplay-js-sdk": "~1.3.1"
   }
 }

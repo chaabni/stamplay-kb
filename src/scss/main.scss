@@ -19,7 +19,9 @@ html, body {
 $primary-color:#272D4E;
 $secondary-color:#545D8E;
 $accent-color:#fbc02d;
-
+.home-icon:hover {
+    color:$accent-color;
+}
 .bg-primary {
     background-color:$primary-color !important;
 }
@@ -134,9 +136,6 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
     align-items: center;
 }
 
-// .tab-heading {
-//     padding-bottom: 20px;
-// }
 
 .border-accent-grey {
     border-bottom: 3px solid #fafafa;

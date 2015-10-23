@@ -23,8 +23,10 @@ angular.module("app", ["ui.router", "ngStamplay", "ngSanitize", "algoliasearch",
     AccountService.currentUser().then(function(user) {
         if(user.isLogged()) {
             $rootScope.currentUser = user.instance;
+            // console.log(user)
         } else {
             $rootScope.currentUser = false;
+            // console.log(false)
         }
     });
 }])

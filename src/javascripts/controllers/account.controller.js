@@ -1,4 +1,4 @@
-angular.module("app").controller("AccountController", ["AccountService", "$scope", "$rootScope", function(AccountService, $scope, $rootScope) {
+angular.module("app").controller("AccountController", ["AccountService", "$scope", "$rootScope", "$stateParams", function(AccountService, $scope, $rootScope, $stateParams) {
 
     $scope.login = function() {
         AccountService.login();
@@ -7,5 +7,4 @@ angular.module("app").controller("AccountController", ["AccountService", "$scope
     $scope.logout = function() {
         AccountService.logout();
     }
-
 }])

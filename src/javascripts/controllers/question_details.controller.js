@@ -1,27 +1,38 @@
 angular.module("app")
     .controller("QuestionDetailsController", ["QuestionService", "$scope", "$rootScope", "$state", "$stateParams", "$stamplay", function(QuestionService, $scope, $rootScope, $state, $stateParams, $stamplay) {
 
+    jQuery('ul.tabs').tabs();
+
     if(!$stateParams.id) $state.go("Home");
     QuestionService.getQuestionDetails($stateParams.id).then(function(question) {
         $scope.question = question;
-        $scope.comments = question.instance.actions.comments;
-        $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;
-
+        $scope.comments = $scope.question.instance.actions.comments;
+        if(question.instance.solution_id && question.instance.solution_id.instance){
+            console.log("THinks there is a solution")
+            $scope.question_solution = question.instance.solution_id;
+            $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
+        } else {
+            console.log("doesnt")
+        }
     })
 
     $scope.addSolution = function(solution, id) {
-        QuestionService.addSolution(solution, id).then(function(res) {
-            $scope.question = res;
+        $scope.processing_solution = true;
+        QuestionService.addSolution(solution, id, $scope.question.instance.owner.email).then(function(res) {
+            $scope.question_solution = res;
+            $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
             $scope.solution_form = false;
+            $scope.processing_solution = false;
             Materialize.toast("Solution has been added.", 2000)
         });
     }
 
     $scope.upvoteSolution = function(question) {
         if($rootScope.currentUser) {
-            question.upVote().then(function() {
+            $scope.question_solution.upVote().then(function() {
                 Materialize.toast("You found this helpful huh? Great!", 2000)
-                $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;                $scope.$apply();
+                $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
+                $scope.$apply();
             }, function() {
                 Materialize.toast("Sorry, only one vote per solution.", 2000)
             })
@@ -32,9 +43,9 @@ angular.module("app")
 
     $scope.downvoteSolution = function(question) {
         if($rootScope.currentUser) {
-            question.downVote().then(function() {
+            $scope.question_solution.downVote().then(function() {
                 Materialize.toast("This wasn't helpful? We are sorry to hear that.", 2000)
-                $scope.voteTotal = question.instance.actions.votes.total - question.instance.actions.votes.users_downvote.length;
+                $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
                 $scope.$apply();
             }, function() {
                 Materialize.toast("Sorry, only one vote per solution.", 2000)
@@ -49,6 +60,7 @@ angular.module("app")
         question.comment(comment);
         question_model.fetch($scope.question.instance._id).then(function(){
             $scope.comments = question_model.getComments();
+            $scope.new_comment = "";
             $scope.$apply();
             Materialize.toast("Comment Posted.", 1000)
         });

@@ -16,13 +16,13 @@
         
         
         <div class="row" ng-hide="question_query">
-             <div ng-show="noResults" class="center-align grey-text">No Questions Have Been Posted Yet, Sign In To Post a Question</div>
+             <div ng-show="noResults" class="center-align grey-text">No Questions Have Been Posted Yet<span ng-if="!currentUser">, Sign In To Post a Question</span></div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
                     <li class="collection-item avatar cursor" ng-repeat="question in questionCollection | orderBy : dt_create : true" ui-sref="Question Details({id : question.instance._id})">
                         <img ng-src="{{question.instance.owner.profileImg}}" class="circle">
                         <a class="secondary-content text-secondary">
-                            <span class="upvote">{{question.instance.actions.votes.users_upvote.length - question.instance.actions.votes.users_downvote.length}}</span>
+                            <span class="upvote">{{question.instance.solution_id[0].actions.votes.users_upvote.length - question.instance.solution_id[0].actions.votes.users_downvote.length}}</span>
                             <i class="material-icons">thumb_up</i>
                         </a>
                         <p class="title col s11 truncate" style="cursor:pointer">{{question.instance.title}}</p>

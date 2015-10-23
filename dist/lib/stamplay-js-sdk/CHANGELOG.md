@@ -1,5 +1,16 @@
 # Stamplay JS SDK Changelog
 
+1.3.1 / 20-10-2015
+===================
+
+* Third party logins send authentication information in short duration cookie in order to merge logged user information with third party informations
+
+1.3.0 / 15-10-2015
+===================
+
+* Added Codeblock integration
+* Webhooks can handle query parameters
+
 1.2.9 / 09-09-2015
 ===================
 

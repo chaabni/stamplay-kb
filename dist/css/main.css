@@ -13,6 +13,10 @@ html, body {
   opacity: 0.8;
 }
 
+.home-icon:hover {
+  color: #fbc02d;
+}
+
 .bg-primary {
   background-color: #272D4E !important;
 }

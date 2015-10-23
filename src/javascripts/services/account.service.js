@@ -2,18 +2,12 @@ angular.module("app").factory("AccountService", ["$q", "$stamplay", function($q,
     var user = $stamplay.User().Model;
     return {
         login : function() {
-            var q = $q.defer();
             // SWITCH TO GITHUB
-            user.login('github').then(function() {
-                q.resolve(user.instance);
-            })
-            return q.promise;
+            user.login('google')
         },
         logout : function() {
-            var q = $q.defer();
             // SWITCH TO GITHUB
-            user.logout('github');
-            return q.promise;
+            user.logout('google');
         },
         currentUser : function() {
             var q = $q.defer();
