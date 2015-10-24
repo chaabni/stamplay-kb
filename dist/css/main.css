@@ -115,6 +115,11 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
   font-weight: bold;
 }
 
+p.title > em {
+  font-weight: bold;
+  font-style: normal !important;
+}
+
 .circle:hover {
   box-shadow: 1px 1px 10px 1px #999;
 }

@@ -30,9 +30,11 @@
             <div style="min-height:70vh">
                 <ul class="collection"
                     style="border:none;">
-                    <li class="collection-item avatar cursor"
-                        ng-repeat="question in questionCollection | orderBy : dt_create : true"
+                    <li class="collection-item avatar cursor velocity-enter-transition-fadeIn"
+                        data-velocity-opts="{ stagger: 100 }"
+                        ng-repeat="question in questionCollection | orderBy : 'dt_create'"
                         ui-sref="Question Details({id : question.instance._id})">
+
                         <img ng-src="{{question.instance.owner.profileImg}}"
                              class="circle">
                         <a class="secondary-content text-secondary">
@@ -57,10 +59,12 @@
         <!-- QUERY QUESTIONS --->
         <!--  -->
         <div class="row" ng-show="question_query.length">
-            <div ng-show="noSearchResults" class="center-align grey-text">No results found matching, <b>{{question_query}}</b>. Please try another search.</div>
+            <div ng-show="noSearchResults" class="center-align grey-text velocity-enter-transition-slideRightIn">No results found matching, <b style="font-style:none !important;font-weight:bold;">{{question_query}}</b>. Please try another search.</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none;">
-                    <li class="collection-item avatar" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
+                    <li class="cursor velocity-enter-transition-fadeIn"
+                       data-velocity-opts="{ stagger: 200 }"
+                       ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
                         <p class="title truncate col s11"
                            ng-bind-html="question._highlightResult.title.value"
                            style="cursor:pointer">

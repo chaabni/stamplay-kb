@@ -13,7 +13,7 @@
       </li>
       <li class="tab col s3">
           <a class="text-primary" href="#comments">Comments
-              <span ng-class="{'chip': question.instance.actions.comments.length}">
+              <span ng-class="{'chip': question.instance.actions.comments}">
                   {{question.instance.actions.comments.length}}
               </span>
           </a>
@@ -88,11 +88,12 @@
           </div>
       </div>
       </div>
-      <div class="row">
+      <div class="row" ng-class="{'border-accent-grey': !question_solution }">
           <button ng-show="!question_solution && !solution_form && currentUser"
                   ng-click="solution_form = !solution_form"
                   class="right col btn bg-secondary text-white">Add Solution
           </button>
+          <h5 ng-if="!question_solution" class="lightweight col s3 center-align">Solution</h5>
           <div ng-if="!question_solution && !solution_form">
               <p class="grey-text text-lighten-1 col">
                   A solution has not been submitted yet. Know the answer? Add the solution.
@@ -153,7 +154,8 @@
           <ul class="collection"
               style="border:none;">
               <li class="collection-item avatar left col s12 valign-wrapper"
-                  ng-repeat="comment in comments"
+                  ng-repeat="comment in comments | orderBy : '-dt_create'"
+                  data-velocity-opts="{ stagger: 5 }"
                   style="padding-left:20px">
                   <div class="col center-align valign">
                       <img ng-src="{{comment.picture || 'http://placehold.it/50x50'}}"

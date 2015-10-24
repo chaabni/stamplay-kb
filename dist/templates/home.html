@@ -19,7 +19,8 @@
              <div ng-show="noResults" class="center-align grey-text">No Questions Have Been Posted Yet<span ng-if="!currentUser">, Sign In To Post a Question</span></div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
-                    <li class="collection-item avatar cursor" ng-repeat="question in questionCollection | orderBy : dt_create : true" ui-sref="Question Details({id : question.instance._id})">
+                    <li class="collection-item avatar cursor velocity-enter-transition-fadeIn" data-velocity-opts="{ stagger: 100 }" ng-repeat="question in questionCollection | orderBy : 'dt_create'" ui-sref="Question Details({id : question.instance._id})">
+
                         <img ng-src="{{question.instance.owner.profileImg}}" class="circle">
                         <a class="secondary-content text-secondary">
                             <span class="upvote">{{question.instance.solution_id[0].actions.votes.users_upvote.length - question.instance.solution_id[0].actions.votes.users_downvote.length}}</span>
@@ -40,10 +41,10 @@
         
         
         <div class="row" ng-show="question_query.length">
-            <div ng-show="noSearchResults" class="center-align grey-text">No results found matching, <b>{{question_query}}</b>. Please try another search.</div>
+            <div ng-show="noSearchResults" class="center-align grey-text velocity-enter-transition-slideRightIn">No results found matching, <b style="font-style:none !important;font-weight:bold">{{question_query}}</b>. Please try another search.</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none">
-                    <li class="collection-item avatar" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
+                    <li class="cursor velocity-enter-transition-fadeIn" data-velocity-opts="{ stagger: 200 }" ng-repeat="question in searchResults" ui-sref="Question Details({id : question._id})">
                         <p class="title truncate col s11" ng-bind-html="question._highlightResult.title.value" style="cursor:pointer">
                         </p>
                         <div class="grey-text lightweight truncate col s11">
