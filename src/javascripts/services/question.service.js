@@ -7,7 +7,9 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             var q = $q.defer();
             question.set("title", details.title);
             question.set("body", details.body);
-            question.set("owner_email", $rootScope.currentUser.email);
+            if(details.owner_email) {
+                question.set("owner_email", details.owner_email);
+            }
             question.save().then(function() {
                 q.resolve(question.instance);
             })
@@ -63,7 +65,9 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
             var solution = $stamplay.Cobject("solution").Model;
             var question = $stamplay.Cobject("question").Model;
             solution.set("description", description);
-            solution.set("question_owner", owner_email);
+            if(owner_email) {
+                solution.set("question_owner", owner_email);
+            }
             solution.save().then(function() {
                 question.fetch(id).then(function() {
                     question.set("solution_id", solution.instance._id);

@@ -94,11 +94,6 @@
                   class="right col btn bg-secondary text-white">Add Solution
           </button>
           <h5 ng-if="!question_solution" class="lightweight col s3 center-align">Solution</h5>
-          <div ng-if="!question_solution && !solution_form">
-              <p class="grey-text text-lighten-1 col">
-                  A solution has not been submitted yet. Know the answer? Add the solution.
-              </p>
-          </div>
           <div class="row"
                ng-show="solution_form && !processing_solution">
               <div class="input-field col s12 card" >
@@ -117,6 +112,11 @@
             <div class="progress bg-primary">
               <div class="indeterminate bg-accent"></div>
             </div>
+          </div>
+      </div>
+      <div ng-if="!question_solution && !solution_form" class="row">
+          <div class="grey-text col s12 center-align">
+              A solution has not been submitted yet. Know the answer? Add the solution.
           </div>
       </div>
   </div>
