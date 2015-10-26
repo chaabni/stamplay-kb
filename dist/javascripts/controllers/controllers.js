@@ -135,7 +135,10 @@ angular.module("app")
           min_height: 300
     };
 
-
+    $scope.htmlToPlaintext = function(text) {
+        // Remove html, & html entities from hits
+        return text ? String(text).replace(/<[^>]+>/gm, '').replace(/&[^\s]*;/gm, ' ') : '';
+    }
 
 }])
 
