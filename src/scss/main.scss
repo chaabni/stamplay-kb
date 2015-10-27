@@ -94,10 +94,14 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
 
 #search-bar:hover {
     width:50%;
-    transition:all ease-in 0.2s 0s;
+    transition:all linear 0.1s;
 }
 #search-bar:focus {
     width:50% !important;
+}
+#search-bar.active {
+    width:50% !important;
+    min-width:200px;
 }
 
 .collection-item{
@@ -152,4 +156,9 @@ p.title > em {
 
 .tabs .indicator{
     background-color: $secondary-color;
+}
+
+
+.hide {
+    opacity: 0;
 }

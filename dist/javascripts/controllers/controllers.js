@@ -23,7 +23,9 @@ angular.module("app").controller("CreateQuestionController", ["QuestionService",
         plugins : 'advlist autolink link image lists charmap print preview',
         theme: "modern",
         skin: 'light',
-        min_height: 200
+        min_height: 200,
+        cleanup : true,
+        format: "html"
     };
 }])
 
