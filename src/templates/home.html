@@ -7,7 +7,7 @@
             <div class="input-field col s3"
                  ng-class="{'active' : question_query}"
                  id="search-bar">
-                <i class="material-icons prefix grey-text text-darken-2 cursor"
+                <i class="material-icons prefix grey-text text-lighten-2 cursor clear_input"
                    style="top:12.5px !important; border:1px solid #eee; width:auto;border-radius:100%"
                    ng-class="{'hide': !question_query}"
                    ng-click="question_query = ''">clear</i>
@@ -15,7 +15,7 @@
                 <input type="text"
                        placeholder="Search Questions"
                        class="input-primary"
-                       ng-change="searchQuestions()"
+                       ng-change="searchQuestions();"
                        ng-model-options="{ debounce: 1000 }"
                        ng-model="question_query" />
             </div>
@@ -65,15 +65,16 @@
         <!--  -->
         <!-- QUERY QUESTIONS --->
         <!--  -->
-        <div class="row" ng-show="question_query.length">
-            <div ng-show="noSearchResults" class="center-align grey-text velocity-enter-transition-slideRightIn">No results found matching, <b style="font-style:none !important;font-weight:bold;">{{question_query}}</b>. Please try another search.</div>
+        <div class="row" ng-show="question_query.length && searchResults !== false" ng-cloak>
+            <div ng-show="noSearchResults" class="center-align grey-text velocity-enter-transition-fadeIn">No results found matching, <b style="font-style:none !important;font-weight:bold;">{{question_query}}</b>. Please try another search.</div>
             <div style="min-height:70vh">
                 <ul class="collection" style="border:none;">
-                    <li class="collection-item cursor velocity-enter-transition-fadeIn"
+                    <li class="collection-item avatar cursor velocity-enter-transition-fadeIn"
                        data-velocity-opts="{ stagger: 100 }"
                        ng-repeat="question in searchResults"
                        ui-sref="Question Details({id : question._id})"
                        style="min-height: 84px;">
+                       <img ng-src="" alt="">
                         <p class="title truncate col s11"
                            ng-bind-html="question._highlightResult.title.value"
                            style="cursor:pointer">
@@ -82,6 +83,11 @@
                        </p>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div class="row" style="min-height:70vh" ng-if="searchResults.length === 0 && noSearchResults === false && question_query.length">
+            <div class="progress bg-primary" style="position:fixed;bottom:-15px;left:0">
+                <div class="indeterminate bg-accent"></div>
             </div>
         </div>
     </div>

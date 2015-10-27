@@ -15,7 +15,10 @@ angular.module("app")
         QuestionService.searchQuestions($scope.question_query).then(function(questions) {
             if(questions.hits.length) {
                 $scope.noSearchResults = false;
-                $scope.searchResults = questions.hits;
+                $scope.searchResults = [];
+                var refresh = setTimeout(function() {
+                    $scope.searchResults = questions.hits;
+                }, 100)
             } else {
                 $scope.noSearchResults = true;
                 $scope.searchResults = [];

@@ -13,6 +13,13 @@ html, body {
   opacity: 0.8;
 }
 
+.clear_input:hover {
+  color: #999 !important;
+  border-color: #999 !important;
+  -webkit-transition: all 0s linear;
+          transition: all 0s linear;
+}
+
 .home-icon:hover {
   color: #fbc02d;
 }
