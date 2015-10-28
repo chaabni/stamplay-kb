@@ -20,6 +20,10 @@ html, body {
           transition: all 0s linear;
 }
 
+.waves-effect.waves-secondary .waves-ripple {
+  background-color: rgba(84, 93, 142, 0.15);
+}
+
 .home-icon:hover {
   color: #fbc02d;
 }
@@ -116,6 +120,11 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
   min-width: 200px;
 }
 
+@media screen and (max-width: 600px) {
+  #search-bar:hover, #search-bar:focus, #search-bar.active {
+    width: 100% !important;
+  }
+}
 .collection-item {
   border-left: 3px solid transparent;
   border-right: 1px solid transparent;
@@ -160,6 +169,15 @@ p.title > em {
   display: flex;
 }
 
+.brand-logo {
+  margin-top: 9px;
+}
+
+@media screen and (max-width: 600px) {
+  .brand-logo {
+    margin-top: 8px;
+  }
+}
 .flex-center {
   -webkit-box-align: center;
   -webkit-align-items: center;

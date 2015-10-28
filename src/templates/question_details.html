@@ -4,7 +4,7 @@
       <li class="tab col m3 s4"><a class="text-primary" href="#question">Question</a></li>
       <li class="tab col m3 s4">
           <a class="text-primary" href="#solution">Solution
-            <span ng-class="{'chip':voteTotal}" ng-show="voteTotal">
+            <span ng-class="{'chip':voteTotal}" class="hide-on-small-only" ng-show="voteTotal">
                 <span>{{voteTotal || '0'}}</span>
                 <i ng-show="voteTotal > 0" class="material-icons tiny">thumb_up</i>
                 <i ng-show='voteTotal < 0' class="material-icons tiny">thumb_down</i>
@@ -13,7 +13,7 @@
       </li>
       <li class="tab col m3 s4">
           <a class="text-primary" href="#comments">Comments
-              <span ng-class="{'chip': question.instance.actions.comments}">
+              <span ng-class="{'chip': question.instance.actions.comments}" class="hide-on-small-only">
                   {{question.instance.actions.comments.length}}
               </span>
           </a>
@@ -65,8 +65,8 @@
                        ng-click="upvoteSolution(question)">
                         <i class="material-icons cursor vote-icon">thumb_up</i>
                     </a>
-                    <span class="col flow-text"
-                          style="font-weight:900;top: -5px;position: relative;"
+                    <span class="col"
+                          style="font-weight:900;top: -5px;position: relative;font-size: 1.75em;padding: 0;"
                           ng-bind="voteTotal">
 
                     </span>

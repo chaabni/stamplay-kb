@@ -1,10 +1,8 @@
 <div class="row">
-    <div class="col s9">
+    <div class="col s12 m12 l9">
         <div class="row"
              style="margin-bottom:0;">
-
-
-            <div class="input-field col s3"
+            <div class="input-field col s12"
                  ng-class="{'active' : question_query}"
                  id="search-bar">
                 <i class="material-icons prefix grey-text text-lighten-2 cursor clear_input"
@@ -19,7 +17,6 @@
                        ng-model-options="{ debounce: 1000 }"
                        ng-model="question_query" />
             </div>
-
             <a class="waves-effect waves-light btn bg-secondary right"
                ui-sref="New Request"
                ng-show="currentUser">
@@ -37,7 +34,7 @@
             <div style="min-height:70vh">
                 <ul class="collection"
                     style="border:none;">
-                    <li class="collection-item avatar cursor velocity-enter-transition-fadeIn"
+                    <li class="collection-item avatar cursor waves-effect waves-secondary velocity-enter-transition-fadeIn"
                         data-velocity-opts="{ stagger: 100 }"
                         ng-repeat="question in questionCollection | orderBy : 'dt_create'"
                         ui-sref="Question Details({id : question.instance._id})">
@@ -94,9 +91,8 @@
         <!--  -->
         <!-- QUERY QUESTIONS End -->
         <!--  -->
-    <div class="col s3"
-         ng-include="'./dist/templates/_slack_invite.html'"
-         style="position:fixed;right:0;">
+    <div class="col s10 offset-s1 m6 offset-m3 l3"
+         ng-include="'./dist/templates/_slack_invite.html'">
     </div>
 </div>
 <div class="progress bg-primary"

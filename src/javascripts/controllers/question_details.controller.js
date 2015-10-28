@@ -46,6 +46,10 @@ angular.module("app")
             $scope.question_solution.downVote().then(function() {
                 Materialize.toast("This wasn't helpful? We are sorry to hear that.", 2000)
                 $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
+
+                $scope.post
+
+
                 $scope.$apply();
             }, function() {
                 Materialize.toast("Sorry, only one vote per solution.", 2000)

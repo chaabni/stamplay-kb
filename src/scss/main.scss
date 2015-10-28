@@ -20,6 +20,9 @@ html, body {
     transition: all 0s linear;
 }
 // Colors
+.waves-effect.waves-secondary .waves-ripple {
+    background-color: rgba(84, 93, 142, 0.15);
+}
 
 $primary-color:#272D4E;
 $secondary-color:#545D8E;
@@ -109,6 +112,12 @@ textarea:focus:not([readonly]).accent-input, input[type=text]:focus:not([readonl
     min-width:200px;
 }
 
+@media screen and (max-width:600px) {
+    #search-bar:hover, #search-bar:focus, #search-bar.active {
+        width:100% !important;
+    }
+}
+
 .collection-item{
     border-left:3px solid transparent;
     border-right:1px solid transparent;
@@ -144,6 +153,16 @@ p.title > em {
 
 .flex {
     display:flex;
+}
+
+.brand-logo {
+    margin-top:9px
+}
+
+@media screen and (max-width:600px) {
+    .brand-logo {
+        margin-top:8px
+    }
 }
 
 .flex-center {

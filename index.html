@@ -13,7 +13,46 @@
         <nav class="row" ng-controller="AccountController">
             <div class="nav-wrapper bg-primary">
                 <div class="col s12">
-                    <ul class="left">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <a ui-sref="Home" class="hide-on-large-only brand-logo center valign-wrapper">
+                        <img src="./dist/images/logo_White.png" class="brand-logo" style="height:24px;">
+                    </a>
+                    <ul class="side-nav" id="mobile-demo">
+                        <!-- User Info - Logged In -->
+                        <li ng-if="currentUser">
+                            <div class="valign-wrapper">
+                                <img ng-src="{{currentUser.profileImg}}" class="profile-img col s4">
+                                <a href="" class="text-white col">{{currentUser.displayName}}</a>
+                            </div>
+                        </li>
+                        <li ng-if="currentUser">
+                            <a class="waves-effect waves-grey btn-flat center-align">
+                                <i class="material-icons">home</i>
+                            </a>
+                        </li>
+                        <li ng-if="currentUser" class="center-align">
+                            <a href="#" class="waves-effect waves-grey text-primary" ng-click="logout()">Logout</a>
+                        </li>
+                        <!-- End Logged In User Info -->
+
+                        <!-- Login & Signup -->
+                        <li ng-if="!currentUser" class="center-align">
+                            <a href="#/"
+                               class="text-secondary"
+                               ng-if="!currentUser"
+                               ng-click="login()">Login
+                           </a>
+                       </li>
+                       <li ng-if="!currentUser" class="center-align">
+                           <a href="#/"
+                              class="text-secondary"
+                              ng-if="!currentUser"
+                              ng-click="login()">Sign Up
+                          </a>
+                      </li>
+                        <!-- End Login & Signup -->
+                      </ul>
+                    <ul class="left hide-on-med-and-down">
                         <li>
                             <a href="#/" class="home-icon">
                                 <i class="material-icons">home</i>
@@ -25,8 +64,7 @@
                             </a>
                         </li>
                     </ul>
-
-                    <ul class="right">
+                    <ul class="right hide-on-med-and-down">
                         <li>
                             <a href="#/"
                                class="lightweight"
@@ -42,7 +80,7 @@
                           </a>
                       </li>
                     </ul>
-                    <ul class="right" ng-cloak ng-show="currentUser">
+                    <ul class="right  hide-on-med-and-down" ng-cloak ng-show="currentUser">
                         <li>
                             <div class="valign-wrapper">
                                 <img ng-src="{{currentUser.profileImg}}" class="profile-img valign">
