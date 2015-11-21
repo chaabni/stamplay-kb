@@ -30,7 +30,7 @@ angular.module("app").controller("CreateQuestionController", ["QuestionService",
 }])
 
 angular.module("app")
-    .controller("HomeController", ["$scope", "$state", "$sce", "QuestionService", function($scope, $state, $sce, QuestionService) {
+    .controller("HomeController", ["$scope", "$state", "$sce", "$stamplay", "QuestionService", function($scope, $state, $sce, $stamplay, QuestionService) {
 
     QuestionService.getQuestions().then(function(questions) {
         if(questions.instance.length) {
@@ -45,11 +45,16 @@ angular.module("app")
     $scope.searchQuestions = function() {
         QuestionService.searchQuestions($scope.question_query).then(function(questions) {
             if(questions.hits.length) {
-                $scope.noSearchResults = false;
-                $scope.searchResults = [];
-                var refresh = setTimeout(function() {
-                    $scope.searchResults = questions.hits;
-                }, 100)
+               questions.hits.forEach(function(item, index, arr) {
+                  QuestionService.getOwner(item.owner).then(function(owner) {
+                     $scope.searchResults[index].owner = owner;
+                  })
+               })
+             $scope.noSearchResults = false;
+             $scope.searchResults = [];
+             var refresh = setTimeout(function() {
+                 $scope.searchResults = questions.hits;
+             }, 100)
             } else {
                 $scope.noSearchResults = true;
                 $scope.searchResults = [];
@@ -58,10 +63,15 @@ angular.module("app")
         })
     }
 
-    $scope.htmlToPlaintext = function(text) {
-        // Remove html, & html entities from hits
-        return text ? String(text).replace(/<[^>]+>/gm, '').replace(/&[^\s]*;/gm, ' ') : '';
-    }
+
+   $scope.removeHTMLTags = function(html){
+      var tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      var htmltext = tmp.innerText;
+      var text = htmltext.replace(/<[^>]*>/g, ' ')
+      return text;
+
+   }
 
 }]);
 
@@ -113,6 +123,10 @@ angular.module("app")
             $scope.question_solution.downVote().then(function() {
                 Materialize.toast("This wasn't helpful? We are sorry to hear that.", 2000)
                 $scope.voteTotal = $scope.question_solution.instance.actions.votes.users_upvote.length - $scope.question_solution.instance.actions.votes.users_downvote.length;
+
+                $scope.post
+
+
                 $scope.$apply();
             }, function() {
                 Materialize.toast("Sorry, only one vote per solution.", 2000)

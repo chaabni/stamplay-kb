@@ -1,4 +1,4 @@
-angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", "$rootScope", function($q, $stamplay, algolia, $rootScope) {
+angular.module("app").factory("QuestionService", ["$q", "$http", "$stamplay", "algolia", "$rootScope", function($q, $http, $stamplay, algolia, $rootScope) {
     var client = algolia.Client('7TMV8F22UN', 'b5e5aa05c764aa1718bc96b793078703');
     var index = client.initIndex('KBQUESTIONS');
     return {
@@ -18,7 +18,7 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
         getQuestions : function() {
             var questionCollection = $stamplay.Cobject("question").Collection;
             var q = $q.defer();
-            questionCollection.populate().limit(25).populateOwner().fetch().then(function() {
+            questionCollection.sortDescending("dt_create").populate().pagination(1, 30).populateOwner().fetch().then(function() {
                 q.resolve(questionCollection);
             })
             return q.promise;
@@ -79,6 +79,16 @@ angular.module("app").factory("QuestionService", ["$q", "$stamplay", "algolia", 
                 })
             })
             return q.promise;
+        },
+        getOwner : function(id) {
+           var q = $q.defer();
+           $http.get('https://stamplaykb.stamplayapp.com/api/user/v1/users?where={"_id":' + '"' + id + '"' + '}')
+           .then(function success(res) {
+             q.resolve(res.data.data[0]);
+          }, function error() {
+             q.reject(error);
+          })
+           return q.promise;
         }
     }
 }]);
