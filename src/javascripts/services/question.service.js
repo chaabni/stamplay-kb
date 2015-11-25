@@ -3,7 +3,7 @@ angular.module("app").factory("QuestionService", ["$q", "$http", "$stamplay", "a
     var index = client.initIndex('KBQUESTIONS');
     return {
         newQuestion : function(details) {
-            var question = $stamplay.Cobject("question").Model;
+            var question = new $stamplay.Cobject("question").Model;
             var q = $q.defer();
             question.set("title", details.title);
             question.set("body", details.body);
@@ -16,7 +16,7 @@ angular.module("app").factory("QuestionService", ["$q", "$http", "$stamplay", "a
             return q.promise;
         },
         getQuestions : function() {
-            var questionCollection = $stamplay.Cobject("question").Collection;
+            var questionCollection = new $stamplay.Cobject("question").Collection;
             var q = $q.defer();
             questionCollection.sortDescending("dt_create").populate().pagination(1, 30).populateOwner().fetch().then(function() {
                 q.resolve(questionCollection);
@@ -34,7 +34,7 @@ angular.module("app").factory("QuestionService", ["$q", "$http", "$stamplay", "a
                 return q.promise;
         },
         getQuestionDetails : function(id) {
-            var question = $stamplay.Cobject("question").Collection;
+            var question = new $stamplay.Cobject("question").Collection;
             var solution_owner = $stamplay.User().Model;
             var q = $q.defer();
             question.equalTo("_id", id).populate().populateOwner().fetch().then(function() {
@@ -62,8 +62,8 @@ angular.module("app").factory("QuestionService", ["$q", "$http", "$stamplay", "a
         },
         addSolution : function(description, id, owner_email) {
             var q = $q.defer();
-            var solution = $stamplay.Cobject("solution").Model;
-            var question = $stamplay.Cobject("question").Model;
+            var solution = new $stamplay.Cobject("solution").Model;
+            var question = new $stamplay.Cobject("question").Model;
             solution.set("description", description);
             if(owner_email) {
                 solution.set("question_owner", owner_email);

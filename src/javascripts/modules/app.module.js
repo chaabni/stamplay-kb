@@ -19,14 +19,11 @@ angular.module("app", ["ui.router","ngAnimate", "angular-velocity", "ngStamplay"
     $urlRouterProvider.otherwise("/");
 }])
 .run(["$stamplay", "$rootScope", "AccountService", function($stamplay, $rootScope, AccountService) {
+
   if(window.location.search.substring(1).split("=")[1]) {
     window.localStorage.setItem("testing", window.location.search.substring(1).split("=")[1]);
     history.pushState({ title : ""}, "Home", "#/")
   }
-    $("body").hide();
-    Stamplay.init("stamplaykb");
-
-
 
     AccountService.currentUser().then(function(user) {
         if(user.isLogged()) {
@@ -36,7 +33,6 @@ angular.module("app", ["ui.router","ngAnimate", "angular-velocity", "ngStamplay"
             $rootScope.currentUser = false;
             // console.log(false)
         }
-        var timer = setTimeout(function(){$("body").fadeIn()}, 500);
 
     });
     $(".button-collapse").sideNav();
